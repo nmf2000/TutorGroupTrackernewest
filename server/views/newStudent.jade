@@ -1,0 +1,23 @@
+//
+   Created by Nick on 29/08/2017.
+
+extends layout
+
+header
+    h1 title
+
+block content
+    - var formName = responseBody.formName
+    - var formId = responseBody._id
+    form(method='POST', action='/formdash/#{formId}/addStudent')
+        p Forename:
+        input(type='text', name='forename')
+        p Surname:
+        input(type='text', name='surname')
+        p Interests:
+        input(type='number', name='interests')
+        p Options:
+        input(type='text', name='options')
+        br
+        br
+        button Submit

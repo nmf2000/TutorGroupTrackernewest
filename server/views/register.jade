@@ -1,0 +1,13 @@
+//
+   Created by Nick on 28/08/2017.
+extends layout
+
+head
+h1 = title
+
+block content
+    form(method='POST' action='/authenticate')
+        input#
+        input#email.form-control(type='text')
+        input#pw.form-control(type='password')
+        button.btn.btn-primary(type='submit') Sign in

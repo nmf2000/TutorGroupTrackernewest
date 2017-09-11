@@ -1,0 +1,35 @@
+//
+   Created by Nick on 24/08/2017.
+
+extends layout
+
+block content
+    - var formName = responseBody.formName
+    - var formId = responseBody._id
+    .container-fluid
+        .row
+            .col-sm-2
+                h3=formName
+        br
+
+        each student in responseBody.students
+            .row.list-group
+                .col-sm-12.col-sm-6.list-group-item
+                    #studentList.col-sm-5.btn.btn-info
+                        a(href="/formdash/#{formId}/#{student._id}/student")=student.forename + " " + student.surname
+
+                    .col-sm-7
+                        if !student.infoDocumentsReceived
+                            span.red
+
+                                p Information documents not received
+                    .col-sm-7
+                        if !student.LearningContractReturned
+                            span.red
+
+                                p Learning contract not returned
+            br
+        .col-sm-4
+        .col-sm-2.btn.btn-primary
+            a(href="/formdash/#{formId}/addStudent") Add new student
+

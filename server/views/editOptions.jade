@@ -1,0 +1,37 @@
+extends layout
+
+block content
+    script(src='/javascripts/doubleListBox.js')
+    .container-fluid
+        .row
+            .col-sm-12
+                h1 Assign Courses
+        .row
+            .list-group
+                .col-sm-6
+                    .list-group-item
+                        h3 Course list:
+                        #subjectList
+                            select
+                                each subject, i in responseBody
+                                    option(value=i) #{subject.courseType} #{subject.subject}
+
+
+                .col-sm-6
+                    .list-group-item
+                        h3 Currently studied courses:
+                        ul
+                        #currentSubjects
+
+
+        .row
+                .col-sm-6
+                    button#submitbtn Add Selected
+                .col-sm-6
+                    button#savetbtn Save changes
+
+
+
+
+
+

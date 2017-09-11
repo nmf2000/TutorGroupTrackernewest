@@ -1,0 +1,67 @@
+extends layout
+
+block content
+    - var formName = responseBody.formGroup
+    - var formId = responseBody.formId
+    - var studentId = responseBody.studentId
+    .container-fluid
+        .row.col-sm-12
+            h1= formName
+        .row
+            .col-sm-12
+                h2= responseBody.forename + " " + responseBody.surname
+            .container-fluid
+                .col-sm-12.col-sm-3
+                    .container-fluid
+
+                        .row
+                            .col-sm-6
+                                form(method='POST', action='/formdash/#{formId}/#{studentId}/student')
+                                    h4 Learning contract returned:
+                                    input(type='checkbox', name='LearningContractReturned', checked=responseBody.LearningContractReturned, value='true')
+                                    h4 Information documents received:
+                                    input(type='checkbox', name='infoDocumentsReceived', checked=responseBody.infoDocumentsReceived, value='true')
+                                    br
+                                    br
+                                    button Save changes
+                .col-sm-5
+                    .container-fluid
+                        .col-sm-12.list-group
+                            .list-group-item
+                                h3 Most recent tutorial:
+                                if !responseBody.recentTutorialDate
+                                    p No tutorials to show
+                                else
+                                    p= 'Date: ' + responseBody.recentTutorialDate
+                                    p= 'Details: ' + responseBody.recentTutorialDetails
+                                    p= 'Actions: ' + responseBody.recentTutorialActions
+                                    p= 'Review Date: ' + responseBody.recentTutorialReviewDate
+                            br
+
+                            .btn.btn-primary
+
+                                a(href='/formdash/#{formId}/#{studentId}/student/tutorials') View all
+                .col-sm-4
+                    .container-fluid
+                        .col-sm-12.list-group
+                            .list-group-item
+                                h3 Most recent ATL and EOSM
+                                if !responseBody.recentEosmDate
+                                    p No EOSMs or ATLs to show
+                                else
+                                    p= 'Date: ' + responseBody.recentEosmDate
+                                    p= 'EOSM: ' + responseBody.recentEosm
+                                    p= 'ATL: ' + responseBody.recentAtl
+                            br
+
+                            .btn.btn-primary
+
+                                a(href='/formdash/#{formId}/#{studentId}/student/eosms') View all
+
+        .row
+            .col-sm-12
+                .btn.btn-primary
+                    a(href='/formdash/#{formId}/#{studentId}/student/options') Edit options
+
+
+

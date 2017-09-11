@@ -1,0 +1,11 @@
+//Created by Nick on 24/08/2017.
+
+extends layout
+head
+  h1 = title
+
+block content
+  form(method='POST' action='http://localhost:3000/api/users/login')
+      input#email.form-control(type='text')
+      input#pw.form-control(type='password')
+      button.btn.btn-primary(type='submit') Sign in

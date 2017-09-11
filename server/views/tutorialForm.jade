@@ -1,0 +1,64 @@
+extends layout
+
+
+
+block content
+    -var studentId = responseBody.studentId
+    -var dateFormat = function(dateIn) {
+        -var date = dateIn;
+        -date = date.replace(/\D/g, " ");
+        -console.log(date);
+        -date = date.split(" ");
+
+        -return date[2] + "/" + date[1] + "/" + date[0];
+    -}
+    .container-fluid
+        .row
+            .col-sm-12
+                h2= responseBody.forename + " " + responseBody.surname
+                h3 Tutorial records
+        .row
+            .col-sm-12.list-group
+
+                each tutorial in responseBody.tutorials
+                    .list-group-item
+                        p
+                        span(style='font-weight:bold') Date: &nbsp;
+                        span(style='font-weight:normal') #{dateFormat(tutorial.date)}
+                        p
+                        span(style='font-weight:bold') Details: &nbsp;
+                        span(style='font-weight:normal') #{tutorial.details}
+                        p
+                        span(style='font-weight:bold') Actions: &nbsp;
+                        span(style='font-weight:normal') #{tutorial.actions}
+                        if !tutorial.reviewDate
+                            p
+                            span(style='font-weight:bold') Review date: &nbsp
+                            span(style='font-weight:normal') None
+                        else
+                            p
+                            span(style='font-weight:bold') Review date: &nbsp;
+                            span(style='font-weight:normal') #{dateFormat(tutorial.reviewDate)}
+
+        .row
+            .col-sm-5
+                 form(method='POST', action='/formdash/#{responseBody.formGroupId}/#{studentId}/student/tutorials')
+                     .row
+                         .col-sm-6
+                             .form-group
+                                 label Date:
+                                 input.date.form-control(type='date', name='tutorialDate')
+                             .form-group
+                                 label Review date:
+                                 input.form-control(type='date', name='reviewDate')
+                     .row
+                         .col-sm-12
+                             .form-group
+                                 label Details:
+                                 textarea.form-control(name='details', cols='50' rows='10')
+                             .form-group
+                                 label Actions:
+                                 textarea.form-control(name='actions', cols='50' rows='10')
+                             .form-group
+                                 button Save tutorial
+

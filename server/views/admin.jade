@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    .container-fluid
+        h1= title
+
+        .row
+            .col-sm-2
+                .row.list-group
+                each form in responseBody
+                    .col-sm-12.list-group-item
+                        a(href="/formdash/#{form._id}" style="color:#000000")= form.formName
+        .row
+            .col-sm-12
+                br
+                .btn.btn-primary
+                    a(href="/admin/newFormGroup") Create form group
+        .row
+            .col-sm-12
+                br
+                .btn.btn-primary
+                    a(href='/admin/subjectDetails') View/Add Subjects
+
+
+
+
