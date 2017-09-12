@@ -1,8 +1,53 @@
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Merriweather Sans', sans-serif;
+
 }
 
 a {
-  color: #00B7FF;
+  color: #ffffff;
+  display: block;
 }
+
+.navbar-default{
+  background-color: #208709;
+  border-bottom: solid;
+}
+
+.navbar-default .navbar-brand {
+  color: #FFFFFF;
+  font-family: 'Indie Flower', cursive;
+  font-size: xx-large;
+}
+
+.red {
+  color: #ac2925;
+}
+
+#studentList.btn{
+  padding: 16px;
+  text-align: left;
+}
+
+.btn.btn-info {
+  color: #ffffff;
+}
+ textarea{
+   resize:none;
+ }
+
+ .highlight{
+   background-color:#66afe9;
+ }
+
+ #subjectList{
+   list-style-type: none;
+ }
+
+ #currentSubjects{
+   list-style-type: none;
+ }
+
+

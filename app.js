@@ -5,6 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var user = require('./api/models/userDetails');
+var passport = require('./server/controllers/passport');
+//var passport = require('passport');
+var expressSession = require('express-session');
+
+
+
 
 //DB Connection
 var uri = 'mongodb://127.0.0.1/StudentTracker';
@@ -18,9 +25,17 @@ mongoose.connection.on('error', function () {
     console.log('Connection error ' + err);
 });
 
+require('./api/models/userDetails');
+require('./api/models/studentDetails');
+require('./api/models/subjectDetails');
+
+var emailJob = require('./server-scripts/mailScheduleApp');
+var job = emailJob.job();
+
 var index = require('./server/routes/index');
 //var users = require('./server/routes/users');
-
+var apiRoutes = require('./api/routes/index');
+    
 var app = express();
 
 // view engine setup
@@ -29,14 +44,24 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(expressSession({secret:"my big secret"}));
+
+
+
+app.use(express.static(path.join(__dirname, 'server', 'public')));
 
 app.use('/', index);
 //app.use('/users', users);
+app.use('/api', apiRoutes);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

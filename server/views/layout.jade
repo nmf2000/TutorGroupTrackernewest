@@ -2,6 +2,24 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet' type='text/css' href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet' type='text/css' href='/stylesheets/style.css')
+    link(href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet")
+    link(href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet")
+    link(href="https://fonts.googleapis.com/css?family=Merriweather+Sans" rel="stylesheet")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+
+
   body
+    div.row
+      div.col-sm-12
+        nav.navbar.navbar-default
+          div.container-fluid
+            div.navbar-header
+              span.white
+                a.navbar-brand(href='/') Tutor Group Tracker
+
+
+        //a(href='../') Back
     block content
